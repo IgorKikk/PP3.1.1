@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <style>table th, table td {padding: 5px;}</style>
+    <title>Пользователи</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h2>Пользователи</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Возраст</th>
+        <th>Изменить</th>
+        <th>Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user, iterStat : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.age}"></td>
+        <td><a th:href="@{/{id}/updateuser (id=${user.id})}">Изменить</a></td>
+<!--        <td><a th:href="@{/{id}/deleteuser (id=${user.id})}">Изменить</a></td>-->
+        <td>
+            <form th:method="DELETE" th:action="@{/{id}/deleteuser (id=${user.id})}">
+                <input type="submit" value="Удалить">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    <p><a href="/adduser">Добавить пользователя</a></p>
+</body>
+</html>
